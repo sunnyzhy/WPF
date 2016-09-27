@@ -1,0 +1,20 @@
+        private void dg_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            if (this.dg.SelectedItems.Count != 1)
+            {
+                return;
+            }
+            Point point = e.GetPosition(this.dg);
+            IInputElement element = this.dg.InputHitTest(point);
+            DependencyObject target = element as DependencyObject;
+            while (target != null)
+            {
+                if (target is DataGridRow)
+                {
+                    object o = (target as DataGridRow).Item;
+                    //do something...
+                    break;
+                }
+                target = VisualTreeHelper.GetParent(target);
+            }
+        }
